@@ -9,6 +9,7 @@ import { sanityFetch } from "@/sanity/lib/client";
 import { OVERVIEW_QUERY } from "@/sanity/lib/queries";
 import { ContentTypeCard } from "@/components/ContentTypeCard";
 import { SectionHeader } from "@/components/SectionHeader";
+import { NorwayMap } from "@/components/NorwayMapWrapper";
 
 export default async function HomePage() {
   const data = await sanityFetch(OVERVIEW_QUERY);
@@ -22,7 +23,7 @@ export default async function HomePage() {
           <span className="text-red-500">.</span> Demo
         </h1>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-500">
-          5 ulike innholdstyper som viser kraften i strukturert innhold.
+          6 ulike innholdstyper som viser kraften i strukturert innhold.
           Alt innhold administreres i Sanity Studio og rendres i Next.js.
         </p>
         <div className="mt-8 flex justify-center gap-4">
@@ -44,13 +45,14 @@ export default async function HomePage() {
       </section>
 
       {/* Innholdstype-oversikt */}
-      <section className="mb-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <section className="mb-16 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
         {[
           { href: "/produktlansering", icon: "🚀", title: "Produktlansering", desc: "Flerspråklig, varianter, priser" },
           { href: "/reiseguide", icon: "🌍", title: "Reiseguide", desc: "Modulære seksjoner, referanser" },
           { href: "/artikkel", icon: "📝", title: "Artikkel", desc: "Rich text, forfattere, SEO" },
           { href: "/produkt", icon: "🛒", title: "Produkt", desc: "E-commerce, varianter, anmeldelser" },
           { href: "/event", icon: "📅", title: "Event", desc: "Agenda, speakers, billetter" },
+          { href: "/kontorer", icon: "📍", title: "Kontorer", desc: "Interaktivt kart, geopoint" },
         ].map((item) => (
           <Link
             key={item.href}
@@ -239,6 +241,44 @@ export default async function HomePage() {
         ) : (
           <p className="text-gray-400 italic">
             Ingen eventer ennå.{" "}
+            <Link href="/studio" className="text-red-500 hover:underline">
+              Opprett i Studio
+            </Link>
+          </p>
+        )}
+      </section>
+
+      {/* Kontorer */}
+      <section className="mb-16">
+        <SectionHeader
+          title="Kontorer"
+          description="Interaktivt Norgeskart med kontorlokasjoner og geopoint-data"
+          href="/kontorer"
+          icon="📍"
+        />
+        {data.offices?.length > 0 ? (
+          <>
+            <NorwayMap offices={data.offices} />
+            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+              {data.offices.map((office: any) => (
+                <div
+                  key={office._id}
+                  className="rounded-lg border border-gray-200 bg-white p-4 text-center shadow-sm"
+                >
+                  <h4 className="font-semibold text-gray-900">
+                    {office.name}
+                    {office.isHeadquarters && (
+                      <span className="ml-1 text-xs text-amber-600">★</span>
+                    )}
+                  </h4>
+                  <p className="text-sm text-gray-500">{office.city}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        ) : (
+          <p className="text-gray-400 italic">
+            Ingen kontorer ennå.{" "}
             <Link href="/studio" className="text-red-500 hover:underline">
               Opprett i Studio
             </Link>

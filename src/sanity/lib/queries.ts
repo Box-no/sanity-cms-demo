@@ -62,6 +62,18 @@ export const OVERVIEW_QUERY = /* groq */ `{
     location,
     "speakerCount": count(speakers),
     isOnline
+  },
+  "offices": *[_type == "office"] | order(isHeadquarters desc, name asc) {
+    _id,
+    name,
+    "slug": slug.current,
+    city,
+    address,
+    phone,
+    email,
+    description,
+    location,
+    isHeadquarters
   }
 }`;
 
