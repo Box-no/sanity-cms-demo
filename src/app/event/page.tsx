@@ -2,7 +2,7 @@
  * Listeside for eventer.
  */
 import type { Metadata } from "next";
-import { sanityFetch } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import { EVENTS_QUERY } from "@/sanity/lib/queries";
 import { ContentTypeCard } from "@/components/ContentTypeCard";
 import { EmptyState } from "@/components/EmptyState";
@@ -10,7 +10,7 @@ import { EmptyState } from "@/components/EmptyState";
 export const metadata: Metadata = { title: "Eventer" };
 
 export default async function EventsPage() {
-  const events = await sanityFetch(EVENTS_QUERY);
+  const { data: events } = await sanityFetch({ query: EVENTS_QUERY });
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

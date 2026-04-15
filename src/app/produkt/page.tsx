@@ -2,7 +2,7 @@
  * Listeside for produkter (e-commerce demo).
  */
 import type { Metadata } from "next";
-import { sanityFetch } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import { PRODUCTS_QUERY } from "@/sanity/lib/queries";
 import { ContentTypeCard } from "@/components/ContentTypeCard";
 import { EmptyState } from "@/components/EmptyState";
@@ -10,7 +10,7 @@ import { EmptyState } from "@/components/EmptyState";
 export const metadata: Metadata = { title: "Produkter" };
 
 export default async function ProductsPage() {
-  const products = await sanityFetch(PRODUCTS_QUERY);
+  const { data: products } = await sanityFetch({ query: PRODUCTS_QUERY });
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

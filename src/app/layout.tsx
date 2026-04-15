@@ -1,5 +1,9 @@
 import type { Metadata } from "next";
+import { VisualEditing } from "next-sanity/visual-editing";
+import { draftMode } from "next/headers";
 import { Header } from "@/components/Header";
+import { DisableDraftMode } from "@/components/DisableDraftMode";
+import { SanityLive } from "@/sanity/lib/live";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -8,10 +12,10 @@ export const metadata: Metadata = {
     default: "Sanity CMS Demo",
   },
   description:
-    "Demo som viser 5 ulike innholdstyper i Sanity Studio med Next.js frontend",
+    "Demo som viser 6 ulike innholdstyper i Sanity Studio med Next.js frontend",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -34,6 +38,13 @@ export default function RootLayout({
             — Kundedemo
           </p>
         </footer>
+        <SanityLive />
+        {(await draftMode()).isEnabled && (
+          <>
+            <DisableDraftMode />
+            <VisualEditing />
+          </>
+        )}
       </body>
     </html>
   );

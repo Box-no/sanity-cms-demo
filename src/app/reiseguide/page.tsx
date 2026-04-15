@@ -2,7 +2,7 @@
  * Listeside for reiseguider.
  */
 import type { Metadata } from "next";
-import { sanityFetch } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import { TRAVEL_GUIDES_QUERY } from "@/sanity/lib/queries";
 import { ContentTypeCard } from "@/components/ContentTypeCard";
 import { EmptyState } from "@/components/EmptyState";
@@ -10,7 +10,7 @@ import { EmptyState } from "@/components/EmptyState";
 export const metadata: Metadata = { title: "Reiseguider" };
 
 export default async function TravelGuidesPage() {
-  const guides = await sanityFetch(TRAVEL_GUIDES_QUERY);
+  const { data: guides } = await sanityFetch({ query: TRAVEL_GUIDES_QUERY });
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

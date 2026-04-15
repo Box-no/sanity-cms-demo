@@ -5,14 +5,14 @@
  * Dette demonstrerer hvordan Sanity kan drive ulike typer innhold fra ett og samme CMS.
  */
 import Link from "next/link";
-import { sanityFetch } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import { OVERVIEW_QUERY } from "@/sanity/lib/queries";
 import { ContentTypeCard } from "@/components/ContentTypeCard";
 import { SectionHeader } from "@/components/SectionHeader";
 import { NorwayMap } from "@/components/NorwayMapWrapper";
 
 export default async function HomePage() {
-  const data = await sanityFetch(OVERVIEW_QUERY);
+  const { data } = await sanityFetch({ query: OVERVIEW_QUERY });
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

@@ -3,7 +3,7 @@
  * Henter alle produktlanseringer fra Sanity og viser dem som kort.
  */
 import type { Metadata } from "next";
-import { sanityFetch } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import { PRODUCT_LAUNCHES_QUERY } from "@/sanity/lib/queries";
 import { ContentTypeCard } from "@/components/ContentTypeCard";
 import { EmptyState } from "@/components/EmptyState";
@@ -11,7 +11,9 @@ import { EmptyState } from "@/components/EmptyState";
 export const metadata: Metadata = { title: "Produktlanseringer" };
 
 export default async function ProductLaunchesPage() {
-  const launches = await sanityFetch(PRODUCT_LAUNCHES_QUERY);
+  const { data: launches } = await sanityFetch({
+    query: PRODUCT_LAUNCHES_QUERY,
+  });
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">

@@ -5,7 +5,7 @@
  */
 import { Metadata } from "next";
 import Image from "next/image";
-import { sanityFetch } from "@/sanity/lib/client";
+import { sanityFetch } from "@/sanity/lib/live";
 import { urlFor } from "@/sanity/lib/image";
 import { OFFICES_QUERY } from "@/sanity/lib/queries";
 import { NorwayMap } from "@/components/NorwayMapWrapper";
@@ -30,7 +30,7 @@ interface Office {
 }
 
 export default async function KontorerPage() {
-  const offices = await sanityFetch<Office[]>(OFFICES_QUERY);
+  const { data: offices } = await sanityFetch({ query: OFFICES_QUERY });
 
   return (
     <main className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
