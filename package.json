@@ -14,10 +14,13 @@
     "@sanity/icons": "^3.5.0",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.72.0",
+    "@types/leaflet": "^1.9.21",
+    "leaflet": "^1.9.4",
     "next": "^15.3.1",
     "next-sanity": "^9.8.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-leaflet": "^5.0.0",
     "sanity": "^3.72.0"
   },
   "devDependencies": {

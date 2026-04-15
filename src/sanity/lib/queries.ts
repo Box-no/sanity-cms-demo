@@ -256,3 +256,23 @@ export const EVENT_BY_SLUG_QUERY = /* groq */ `
     sponsors[]{ _key, name, logo, url, tier }
   }
 `;
+
+// ==========================================
+// KONTORER
+// ==========================================
+
+export const OFFICES_QUERY = /* groq */ `
+  *[_type == "office"] | order(isHeadquarters desc, name asc) {
+    _id,
+    name,
+    "slug": slug.current,
+    city,
+    address,
+    phone,
+    email,
+    description,
+    image,
+    location,
+    isHeadquarters
+  }
+`;

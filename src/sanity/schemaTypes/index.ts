@@ -14,6 +14,7 @@ import { travelGuide } from "./travelGuide";
 import { article } from "./article";
 import { product } from "./product";
 import { event } from "./event";
+import { office } from "./office";
 
 export const schemaTypes = [
   // Gjenbrukbare objekttyper
@@ -31,4 +32,5 @@ export const schemaTypes = [
   article,
   product,
   event,
+  office,
 ];

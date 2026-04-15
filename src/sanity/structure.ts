@@ -14,6 +14,7 @@ import {
   UserIcon,
   UsersIcon,
   PinIcon,
+  HomeIcon,
 } from "@sanity/icons";
 
 export const structure: StructureResolver = (S) =>
@@ -61,4 +62,9 @@ export const structure: StructureResolver = (S) =>
         .title("Steder / Restauranter")
         .icon(PinIcon)
         .child(S.documentTypeList("place").title("Steder")),
+
+      S.listItem()
+        .title("Kontorer")
+        .icon(HomeIcon)
+        .child(S.documentTypeList("office").title("Kontorer")),
     ]);
