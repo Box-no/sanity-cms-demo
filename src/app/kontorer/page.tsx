@@ -4,28 +4,16 @@
  * Demonstrerer: Geopoint-felt, Leaflet-kartintegrasjon, markører med popup.
  */
 import { Metadata } from "next";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import { sanityFetch } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { OFFICES_QUERY } from "@/sanity/lib/queries";
+import { NorwayMap } from "@/components/NorwayMapWrapper";
 
 export const metadata: Metadata = {
   title: "Våre kontorer – Sanity Demo",
   description: "Interaktivt kart over kontorene våre i Norge",
 };
-
-const NorwayMap = dynamic(
-  () => import("@/components/NorwayMap").then((mod) => mod.NorwayMap),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="h-[500px] w-full rounded-xl bg-gray-100 animate-pulse flex items-center justify-center">
-        <p className="text-gray-400">Laster kart…</p>
-      </div>
-    ),
-  }
-);
 
 interface Office {
   _id: string;
