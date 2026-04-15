@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { client } from "@/sanity/lib/client";
+import { client, sanityFetch } from "@/sanity/lib/client";
 import { TRAVEL_GUIDE_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { TravelGuideView } from "@/components/views/TravelGuideView";
 
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function TravelGuidePage({ params }: Props) {
   const { slug } = await params;
-  const data = await client.fetch(TRAVEL_GUIDE_BY_SLUG_QUERY, { slug });
+  const data = await sanityFetch(TRAVEL_GUIDE_BY_SLUG_QUERY, { slug });
 
   if (!data) notFound();
 

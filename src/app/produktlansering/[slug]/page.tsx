@@ -4,7 +4,7 @@
  */
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { client } from "@/sanity/lib/client";
+import { client, sanityFetch } from "@/sanity/lib/client";
 import { PRODUCT_LAUNCH_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { ProductLaunchView } from "@/components/views/ProductLaunchView";
 
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ProductLaunchPage({ params }: Props) {
   const { slug } = await params;
-  const data = await client.fetch(PRODUCT_LAUNCH_BY_SLUG_QUERY, { slug });
+  const data = await sanityFetch(PRODUCT_LAUNCH_BY_SLUG_QUERY, { slug });
 
   if (!data) notFound();
 

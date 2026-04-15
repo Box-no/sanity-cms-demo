@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { client } from "@/sanity/lib/client";
+import { client, sanityFetch } from "@/sanity/lib/client";
 import { ARTICLE_BY_SLUG_QUERY } from "@/sanity/lib/queries";
 import { ArticleView } from "@/components/views/ArticleView";
 
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArticlePage({ params }: Props) {
   const { slug } = await params;
-  const data = await client.fetch(ARTICLE_BY_SLUG_QUERY, { slug });
+  const data = await sanityFetch(ARTICLE_BY_SLUG_QUERY, { slug });
 
   if (!data) notFound();
 
